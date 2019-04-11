@@ -9,12 +9,13 @@ public class PlayerMovement : MonoBehaviour {
     public float speed;
     Animator player_anim;
     private Vector3 mousePos;
+    bool firing_start;
 
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
-        Debug.Log(rb);
         player_anim = GetComponent<Animator>();
+        firing_start = false;
     }
 	
 	
@@ -23,20 +24,26 @@ public class PlayerMovement : MonoBehaviour {
         float h = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector3(h * speed, rb.velocity.y, rb.velocity.z);
 
+        Debug.Log(transform.forward);
+
         float v = Input.GetAxisRaw("Vertical");
         rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, v * speed);
+
+      
+ 
 
         animate(h, v);
 
         
     }
 
-    public void animate(float h, float v)
+    
+
+        public void animate(float h, float v)
     {
-       // if (transform.rotation.y >= 0)
-        //{
+      
             float pos = transform.rotation.eulerAngles.y ;
-            Debug.Log(pos);
+            //Debug.Log(pos);
             if (pos <= 45f || pos >= 315f)
             {
                 //Debug.Log("hello1");
@@ -74,14 +81,7 @@ public class PlayerMovement : MonoBehaviour {
                 player_anim.SetBool("walk_left", v < 0);
                 player_anim.SetBool("walk_right", v > 0);
             }
-       // }
 
-        /*else
-        {
-            player_anim.SetBool("walk_left", h < 0);
-            player_anim.SetBool("walk_right", h > 0);
-            player_anim.SetBool("walk_back", v < 0);
-            player_anim.SetBool("walk_forward", v > 0);
-        }*/
+ 
     }
 }
