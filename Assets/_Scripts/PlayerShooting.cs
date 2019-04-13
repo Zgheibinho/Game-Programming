@@ -7,7 +7,6 @@ public class PlayerShooting : MonoBehaviour {
     Animator player_anim;
     bool firing_start;
     public GameObject projectile;
-    public GameObject RightHand;
     public GameObject Player;
     private GameObject tempProjectile;
     //private Vector3 mousePos;
@@ -27,13 +26,8 @@ public class PlayerShooting : MonoBehaviour {
             if (!firing_start)
             {
                 firing_start = true;
-               // mousePos = Input.mousePosition;
-               // mousePos.z = transform.position.z + 5;
-               // mousePos.y = 1.549f;
-               // mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-                tempProjectile = GameObject.Instantiate(projectile, RightHand.transform);
+                tempProjectile = GameObject.Instantiate(projectile, transform);
                 tempProjectile.transform.SetParent(null);
-               // tempProjectile.transform.LookAt(mousePos);
                 tempProjectile.GetComponent<Rigidbody>().AddForce(Player.transform.forward * 15, ForceMode.Impulse);
                 StartCoroutine("Fire");
             }
@@ -44,7 +38,6 @@ public class PlayerShooting : MonoBehaviour {
     {
         // Play the animation for firing
 
-        Debug.Log("has fired");
 
         player_anim.SetBool("isFiring", true);
 
@@ -52,7 +45,6 @@ public class PlayerShooting : MonoBehaviour {
 
         player_anim.SetBool("isFiring", false);
 
-        Debug.Log("Finished Firing");
         firing_start = false;
     }
 }

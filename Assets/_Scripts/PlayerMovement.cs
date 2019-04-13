@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour {
         float h = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector3(h * speed, rb.velocity.y, rb.velocity.z);
 
-        Debug.Log(transform.forward);
 
         float v = Input.GetAxisRaw("Vertical");
         rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, v * speed);
