@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     // Start is called before the first frame update
-    private int health;
+    public int health;
+    public int coins;
     void Start()
     {
         health = 100;
@@ -20,5 +21,10 @@ public class PlayerStats : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+    }
+
+    public void IncreaseCoins(int amount)
+    {
+        coins += amount;
     }
 }

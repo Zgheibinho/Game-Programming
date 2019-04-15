@@ -6,7 +6,7 @@ public class ProjectileController : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    
+
     void Start()
     {
 
@@ -15,15 +15,8 @@ public class ProjectileController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "enemy")
-        {
-            //Debug.Log("enemy was hit; Projectile Controller script");
-            other.GetComponent<EnemyStats>().TakeDamage(1);
-        }
-    }
+    
 }

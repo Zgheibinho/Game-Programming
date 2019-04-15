@@ -10,12 +10,17 @@ public class PlayerMovement : MonoBehaviour {
     Animator player_anim;
     private Vector3 mousePos;
     bool firing_start;
+    private AudioSource audiosrc;
+    public AudioClip walkingAudio;
 
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
         player_anim = GetComponent<Animator>();
+        audiosrc = GetComponent<AudioSource>();
         firing_start = false;
+
+        StartCoroutine("footsteps");
     }
 	
 	
@@ -82,5 +87,23 @@ public class PlayerMovement : MonoBehaviour {
             }
 
  
+    }
+
+    public void PlayFootSteps()
+    {
+        audiosrc.clip = walkingAudio;
+        audiosrc.Play();
+    }
+
+    
+
+    private IEnumerator footsteps()
+    {
+        while(true)
+        {
+            if ((Mathf.Abs(rb.velocity.y) + Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z)) > 0)
+                PlayFootSteps();
+            yield return new WaitForSeconds(0.6f);
+        }
     }
 }

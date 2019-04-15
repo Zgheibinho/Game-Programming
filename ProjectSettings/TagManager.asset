@@ -8,6 +8,9 @@ TagManager:
   - spawn
   - projectile1
   - enemy
+  - boundary
+  - coinText
+  - healthText
   layers:
   - Default
   - TransparentFX

@@ -5,9 +5,10 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private float radius = 4;
+    private float radius = 2.5f;
     private NavMeshAgent agent;
     private GameObject player;
+    private bool isAttacking;
     Animator enemy_anim;
     Rigidbody rb;
     // Use this for initialization
@@ -19,7 +20,8 @@ public class EnemyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         agent.SetDestination(player.transform.position);
         StartCoroutine("Move");
-
+        isAttacking = false;
+        StartCoroutine("Damage");
     }
 
     // Update is called once per frame
@@ -34,27 +36,20 @@ public class EnemyMovement : MonoBehaviour
     void FixedUpdate()
     {
         if (enabled)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, player.transform.position - this.transform.position, out hit, Mathf.Infinity))
-            {
-                // Debug.Log("hello tag:" + hit.collider);
-                if (hit.collider.tag == "player")
-                {
-                    //Debug.Log("hello collider is player");
+        { 
 
                     if (Mathf.Sqrt((player.transform.position - transform.position).sqrMagnitude) < radius)
                     {
 
                         enemy_anim.SetBool("attack", true);
-                        Debug.Log("radius is smaller");
+                        
+                        isAttacking = true;
+                        
                     }
                     else
                     {
                         enemy_anim.SetBool("attack", false);
-                        // Debug.Log("radius is bigger");
-                    }
-                }
+                        isAttacking = false;
             }
             Debug.DrawRay(transform.position, player.transform.position - this.transform.position);
             enemy_anim.SetFloat("speed", Mathf.Sqrt((agent.velocity.sqrMagnitude)));
@@ -76,4 +71,18 @@ public class EnemyMovement : MonoBehaviour
 
         }
     }
+
+    private IEnumerator Damage()
+    {
+        // Play the animation for firing
+
+        while (enabled)
+        {
+            if(isAttacking)
+                player.GetComponent<PlayerStats>().TakeDamage(2);
+            yield return new WaitForSeconds(1f);
+
+        }
+    }
+
 }
