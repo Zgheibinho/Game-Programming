@@ -9,7 +9,7 @@ public class PlayerStats : MonoBehaviour
     public int coins;
     void Start()
     {
-        health = 100;
+        health = 6;
     }
 
     // Update is called once per frame
@@ -21,10 +21,23 @@ public class PlayerStats : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        Debug.Log("playerstats; health :" + health);
+        if (health <= 0)
+            Die();
     }
 
     public void IncreaseCoins(int amount)
     {
         coins += amount;
+    }
+
+    public void Die()
+    {
+        GameObject hud = GameObject.FindGameObjectWithTag("HUD");
+        //Debug.Log("hud is" + hud);
+        hud.GetComponent<HUDController>().GameOver();
+        gameObject.GetComponent<PlayerMovement>().Die();
+        gameObject.GetComponent<PlayerShooting>().enabled = false;
+        gameObject.GetComponent<LookTowardMouse>().enabled = false;
     }
 }

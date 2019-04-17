@@ -39,7 +39,7 @@ public class EnemyStats : MonoBehaviour
     {
         if (other.tag == "projectile1")
         {
-            Debug.Log("hello enemystats; projectile collide");
+           // Debug.Log("hello enemystats; projectile collide");
             TakeDamage(1);
             other.gameObject.SetActive(false);
         }
@@ -56,7 +56,14 @@ public class EnemyStats : MonoBehaviour
         player.GetComponent<PlayerStats>().IncreaseCoins(5);
         enemy_anim.SetBool("attack", false);
         enemy_anim.SetBool("dead", true);
+        StartCoroutine("disable");
 
+    }
+
+    private IEnumerator disable()
+    {
+        yield return new WaitForSeconds(1.5f);
+        gameObject.SetActive(false);
     }
 
 }

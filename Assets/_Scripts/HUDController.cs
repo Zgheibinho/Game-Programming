@@ -8,6 +8,7 @@ public class HUDController : MonoBehaviour
     GameObject cointext;
     GameObject healthtext;
     GameObject player;
+    public GameObject gameOverText;
     void Start()
     {
         cointext = GameObject.FindGameObjectWithTag("coinText");
@@ -20,5 +21,11 @@ public class HUDController : MonoBehaviour
     {
         cointext.GetComponent<UnityEngine.UI.Text>().text = ""+ player.GetComponent<PlayerStats>().coins;
         healthtext.GetComponent<UnityEngine.UI.Text>().text = "" + player.GetComponent<PlayerStats>().health;
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("aaaaaaaaaaaaaaa");
+        gameOverText.SetActive(true);
     }
 }

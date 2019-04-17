@@ -17,7 +17,7 @@ public class PlayerShooting : MonoBehaviour {
 
     void Start()
     {
-        Debug.Log("hello 1");
+       // Debug.Log("hello 1");
         player_anim = GetComponent<Animator>();
         firing_start = false;
         audiosrc = GetComponent<AudioSource>();
@@ -45,7 +45,7 @@ public class PlayerShooting : MonoBehaviour {
                 tempProjectile.transform.SetParent(null);
                 tempProjectile.GetComponent<Rigidbody>().AddForce(Player.transform.forward * 15, ForceMode.Impulse);*/
                 GameObject tempProjectile =GetPooledObject();
-                Debug.Log("Player shooting script; pooledObjects length"+ pooledObjects.Count);
+              //  Debug.Log("Player shooting script; pooledObjects length"+ pooledObjects.Count);
                 if (tempProjectile != null)
                 {
                     tempProjectile.transform.position = this.transform.position + new Vector3(0.129f, 0.991f, -0.027f);
