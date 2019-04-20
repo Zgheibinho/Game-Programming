@@ -11,9 +11,11 @@ public class EnemyMovement : MonoBehaviour
     private bool isAttacking;
     Animator enemy_anim;
     Rigidbody rb;
+    public bool dead;
     // Use this for initialization
     void Start()
     {
+        dead = false;
         player = GameObject.FindWithTag("player");
         agent = GetComponent<NavMeshAgent>();
         enemy_anim = GetComponent<Animator>();
@@ -23,6 +25,20 @@ public class EnemyMovement : MonoBehaviour
         isAttacking = false;
         StartCoroutine("Damage");
     }
+    void OnEnable()
+    {
+        Debug.Log("Enabled");
+        player = GameObject.FindWithTag("player");
+        dead = false;
+        agent = GetComponent<NavMeshAgent>();
+        enemy_anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
+        agent.SetDestination(player.transform.position);
+        StartCoroutine("Move");
+        isAttacking = false;
+        StartCoroutine("Damage");
+        
+    } 
 
     // Update is called once per frame
     void Update()
@@ -35,8 +51,9 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (enabled)
-        { 
+        if (!dead)
+        {
+            
 
                     if (Mathf.Sqrt((player.transform.position - transform.position).sqrMagnitude) < radius)
                     {
@@ -62,13 +79,14 @@ public class EnemyMovement : MonoBehaviour
     private IEnumerator Move()
     {
         // Play the animation for firing
-
-        while (enabled)
+        Debug.Log("yooo1");
+        while (!dead)
         {
-            agent.SetDestination(player.transform.position);
-            transform.LookAt(player.transform);
-            yield return new WaitForSeconds(1.5f);
-
+            Debug.Log("yooo");
+                agent.SetDestination(player.transform.position);
+                transform.LookAt(player.transform);
+                yield return new WaitForSeconds(1.5f);
+            
         }
     }
 
@@ -76,12 +94,13 @@ public class EnemyMovement : MonoBehaviour
     {
         // Play the animation for firing
 
-        while (enabled)
+        while (!dead)
         {
-            if(isAttacking)
-                player.GetComponent<PlayerStats>().TakeDamage(2);
-            yield return new WaitForSeconds(1f);
-
+            
+                if (isAttacking)
+                    player.GetComponent<PlayerStats>().TakeDamage(2);
+                yield return new WaitForSeconds(1f);
+            
         }
     }
 

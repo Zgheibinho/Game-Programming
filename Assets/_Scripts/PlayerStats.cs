@@ -9,7 +9,7 @@ public class PlayerStats : MonoBehaviour
     public int coins;
     void Start()
     {
-        health = 6;
+        health = 15;
     }
 
     // Update is called once per frame

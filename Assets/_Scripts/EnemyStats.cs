@@ -6,15 +6,24 @@ using UnityEngine.AI;
 public class EnemyStats : MonoBehaviour
 {
     // Start is called before the first frame update
-    private int health;
+    public int health;
+    public const int maxHealth = 2;
     Animator enemy_anim;
     bool dead = false;
     GameObject player;
     void Start()
     {
         enemy_anim = GetComponent<Animator>();
-        health = 2;
+        health = maxHealth;
         player = GameObject.FindGameObjectWithTag("player");
+    }
+
+    private void OnEnable()
+    {
+        enemy_anim = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("player");
+        health = maxHealth;
+        enemy_anim.SetBool("dead", false);
     }
 
     // Update is called once per frame
@@ -48,8 +57,8 @@ public class EnemyStats : MonoBehaviour
     public void Die()
     {
         //Debug.Log("enemystats; "+this.GetComponent<EnemyMovement>());
-        this.GetComponent<EnemyMovement>().enabled = false;
-        this.GetComponent<NavMeshAgent>().enabled = false;
+        this.GetComponent<EnemyMovement>().dead = true;
+        //this.GetComponent<NavMeshAgent>().enabled = false;
        // Debug.Log("enemystats; " + this.GetComponent<EnemyMovement>().enabled);
         // Debug.Log("Enemy Stats script ; enemy died");
         dead = true;
@@ -63,6 +72,7 @@ public class EnemyStats : MonoBehaviour
     private IEnumerator disable()
     {
         yield return new WaitForSeconds(1.5f);
+        dead = false;
         gameObject.SetActive(false);
     }
 

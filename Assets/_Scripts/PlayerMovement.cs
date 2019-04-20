@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 	
 	
-	void Update ()
+	void FixedUpdate ()
     {
         if (!dead)
         {

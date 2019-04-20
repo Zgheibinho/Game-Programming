@@ -9,11 +9,16 @@ public class EnemySpawnController : MonoBehaviour
     public GameObject enemy;
     public List<GameObject> pooledObjects;
     public int amountToPool = 20;
+    private int currentround;
+    private bool roundStarted;
+    private GameObject roundText;
     void Start()
     {
         spawnPoints= GameObject.FindGameObjectsWithTag("spawn");
-
-        StartCoroutine("spawning");
+        currentround = 1;
+        roundStarted = false;
+        roundText = GameObject.FindGameObjectWithTag("roundtext");
+        //StartCoroutine("spawning");
         pooledObjects = new List<GameObject>();
         for (int i = 0; i < amountToPool; i++)
         {
@@ -22,15 +27,44 @@ public class EnemySpawnController : MonoBehaviour
             obj.SetActive(false);
             pooledObjects.Add(obj);
         }
+
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(!roundStarted)
+        {
+            if(currentround ==1)
+            {
+                StartCoroutine("round1");
+                roundStarted = true;
+            }
+            if (currentround == 2)
+            {
+                StartCoroutine("round2");
+                roundStarted = true;
+            }
+            if (currentround == 3)
+            {
+                StartCoroutine("round3");
+                roundStarted = true;
+            }
+            if (currentround == 4)
+            {
+                StartCoroutine("round4");
+                roundStarted = true;
+            }
+            if (currentround == 5)
+            {
+                StartCoroutine("round5");
+                roundStarted = true;
+            }
+        }
     }
 
-    private IEnumerator spawning()
+    private IEnumerator spawningZolrik()
     {
 
         while (true)
@@ -44,8 +78,78 @@ public class EnemySpawnController : MonoBehaviour
             tempenemy.transform.SetParent(null);
             tempenemy.transform.position = spawnPoints[currentSpawn].transform.position;
             tempenemy.SetActive(true);
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(15f);
         }
+    }
+
+    private IEnumerator round1()
+    {
+        StartCoroutine("displayRound");
+        yield return new WaitForSeconds(30f);
+        StartCoroutine("spawningZolrik");
+        yield return new WaitForSeconds(120f);
+        StopCoroutine("spawningZolrik");
+        StartCoroutine("roundEnded");
+        currentround++;
+        roundStarted = false;
+    }
+
+    private IEnumerator round2()
+    {
+        StartCoroutine("displayRound");
+        yield return new WaitForSeconds(30f);
+        StartCoroutine("spawningZolrik");
+        yield return new WaitForSeconds(120f);
+        StopCoroutine("spawningZolrik");
+        StartCoroutine("roundEnded");
+        currentround++;
+        roundStarted = false;
+    }
+
+    private IEnumerator round3()
+    {
+        StartCoroutine("displayRound");
+        yield return new WaitForSeconds(30f);
+        StartCoroutine("spawningZolrik");
+        yield return new WaitForSeconds(120f);
+        StopCoroutine("spawningZolrik");
+        StartCoroutine("roundEnded");
+        currentround++;
+        roundStarted = false;
+    }
+
+    private IEnumerator round4()
+    {
+        StartCoroutine("displayRound");
+        yield return new WaitForSeconds(30f);
+        StartCoroutine("spawningZolrik");
+        yield return new WaitForSeconds(120f);
+        StopCoroutine("spawningZolrik");
+        StartCoroutine("roundEnded");
+        currentround++;
+        roundStarted = false;
+    }
+
+    private IEnumerator round5()
+    {
+        StartCoroutine("displayRound");
+        yield return new WaitForSeconds(30f);
+        StartCoroutine("spawningZolrik");
+        yield return new WaitForSeconds(120f);
+        StopCoroutine("spawningZolrik");
+        StartCoroutine("roundEnded");
+        currentround++;
+        roundStarted = false;
+    }
+    private IEnumerator displayRound()
+    {
+        roundText.GetComponent<UnityEngine.UI.Text>().text = "Round will start in 30 seconds";
+        yield return new WaitForSeconds(5f);
+        roundText.GetComponent<UnityEngine.UI.Text>().text = "";
+        yield return new WaitForSeconds(20f);
+        roundText.GetComponent<UnityEngine.UI.Text>().text = "Round" + currentround;
+        yield return new WaitForSeconds(5f);
+        roundText.GetComponent<UnityEngine.UI.Text>().text = "";
     }
 
     public GameObject GetPooledObject()
@@ -65,5 +169,6 @@ public class EnemySpawnController : MonoBehaviour
         pooledObjects.Add(obj);
         return obj;
     }
+
 
 }

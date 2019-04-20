@@ -12,6 +12,7 @@ TagManager:
   - coinText
   - healthText
   - HUD
+  - roundtext
   layers:
   - Default
   - TransparentFX
