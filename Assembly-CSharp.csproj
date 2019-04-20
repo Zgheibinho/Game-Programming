@@ -73,12 +73,17 @@
     <Compile Include="Assets\_Scripts\PlayerStats.cs" />
     <Compile Include="Assets\_Scripts\ProjectileController.cs" />
     <Compile Include="Assets\Imported Assets\FantasyMonstersZolrik\Scene\Script\buttondemo2.cs" />
+    <Compile Include="Assets\Imported Assets\LowPoly Fantasy Monsters Pack Ver1.0_Demo\Environment\Scripts\Move.cs" />
+    <Compile Include="Assets\Imported Assets\LowPoly Fantasy Monsters Pack Ver1.0_Demo\Environment\Scripts\PointLight.cs" />
     <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshLink.cs" />
     <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshModifier.cs" />
     <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshModifierVolume.cs" />
     <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshSurface.cs" />
     <None Include="Assets\Imported Assets\A_piece_of_nature\Readme.txt" />
+    <None Include="Assets\Imported Assets\LowPoly Fantasy Monsters Pack Ver1.0_Demo\READ ME FIRST!!!\character setup guide link.txt" />
+    <None Include="Assets\Imported Assets\SpellBookPreface\ReadMe.txt" />
     <None Include="Assets\Imported Assets\FantasyEnvironments\Environments\README.txt" />
+    <None Include="Assets\Imported Assets\LowPoly Fantasy Monsters Pack Ver1.0_Demo\READ ME FIRST!!!\read me.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/User/Documents/Unity projects/Game-Programming/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

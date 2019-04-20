@@ -6,10 +6,11 @@ public class PlayerStats : MonoBehaviour
 {
     // Start is called before the first frame update
     public int health;
+    public int maxHealth;
     public int coins;
     void Start()
     {
-        health = 15;
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -29,6 +30,11 @@ public class PlayerStats : MonoBehaviour
     public void IncreaseCoins(int amount)
     {
         coins += amount;
+    }
+
+    public void heal()
+    {
+        health = maxHealth;
     }
 
     public void Die()

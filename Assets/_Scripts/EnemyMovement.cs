@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour
     Animator enemy_anim;
     Rigidbody rb;
     public bool dead;
+    public int dmgAmount;
     // Use this for initialization
     void Start()
     {
@@ -98,7 +99,7 @@ public class EnemyMovement : MonoBehaviour
         {
             
                 if (isAttacking)
-                    player.GetComponent<PlayerStats>().TakeDamage(2);
+                    player.GetComponent<PlayerStats>().TakeDamage(dmgAmount);
                 yield return new WaitForSeconds(1f);
             
         }

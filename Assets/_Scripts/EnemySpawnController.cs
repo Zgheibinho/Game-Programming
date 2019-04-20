@@ -7,28 +7,38 @@ public class EnemySpawnController : MonoBehaviour
     // Start is called before the first frame update
     private GameObject[] spawnPoints;
     public GameObject enemy;
-    public List<GameObject> pooledObjects;
-    public int amountToPool = 20;
+    public GameObject mercenary;
+    private List<GameObject> pooledZolriks; //public??
+    private List<GameObject> pooledMercs;
+    public int amountToPoolZolrik;
+    public int amountToPoolMercenary;
     private int currentround;
     private bool roundStarted;
     private GameObject roundText;
+    private GameObject player;
     void Start()
     {
         spawnPoints= GameObject.FindGameObjectsWithTag("spawn");
         currentround = 1;
         roundStarted = false;
         roundText = GameObject.FindGameObjectWithTag("roundtext");
-        //StartCoroutine("spawning");
-        pooledObjects = new List<GameObject>();
-        for (int i = 0; i < amountToPool; i++)
+        player = GameObject.FindGameObjectWithTag("player");
+        pooledZolriks = new List<GameObject>();
+        for (int i = 0; i < amountToPoolZolrik; i++)
         {
-            //Debug.Log("hello ; player shooting script");
             GameObject obj = (GameObject)Instantiate(enemy);
             obj.SetActive(false);
-            pooledObjects.Add(obj);
+            pooledZolriks.Add(obj);
         }
 
-       
+        for (int i = 0; i < amountToPoolMercenary; i++)
+        {
+            GameObject obj = (GameObject)Instantiate(mercenary);
+            obj.SetActive(false);
+            pooledMercs.Add(obj);
+        }
+
+
     }
 
     // Update is called once per frame
@@ -73,12 +83,26 @@ public class EnemySpawnController : MonoBehaviour
             //Debug.Log("spawning enemies spawnPoints Length:" + spawnPoints.Length);
             int currentSpawn = Random.Range(1, spawnPoints.Length);
             //Debug.Log("current spawn" + currentSpawn + "current sspawn transform" + spawnPoints[currentSpawn].transform.position );
-            GameObject tempenemy = GetPooledObject();
-            Debug.Log("number of pooled objects"+ pooledObjects.Capacity);
+            GameObject tempenemy = GetPooledObject(pooledZolriks);
             tempenemy.transform.SetParent(null);
             tempenemy.transform.position = spawnPoints[currentSpawn].transform.position;
             tempenemy.SetActive(true);
-            yield return new WaitForSeconds(15f);
+            yield return new WaitForSeconds(7f);
+        }
+    }
+
+    private IEnumerator spawningMercenary()
+    {
+
+        while (true)
+        {
+
+            int currentSpawn = Random.Range(1, spawnPoints.Length);
+            GameObject tempmerc = GetPooledObject(pooledMercs);
+            tempmerc.transform.SetParent(null);
+            tempmerc.transform.position = spawnPoints[currentSpawn].transform.position;
+            tempmerc.SetActive(true);
+            yield return new WaitForSeconds(11f);
         }
     }
 
@@ -87,10 +111,11 @@ public class EnemySpawnController : MonoBehaviour
         StartCoroutine("displayRound");
         yield return new WaitForSeconds(30f);
         StartCoroutine("spawningZolrik");
-        yield return new WaitForSeconds(120f);
+        yield return new WaitForSeconds(90f);
         StopCoroutine("spawningZolrik");
         StartCoroutine("roundEnded");
         currentround++;
+        player.GetComponent<PlayerStats>().heal();
         roundStarted = false;
     }
 
@@ -99,6 +124,7 @@ public class EnemySpawnController : MonoBehaviour
         StartCoroutine("displayRound");
         yield return new WaitForSeconds(30f);
         StartCoroutine("spawningZolrik");
+        StartCoroutine("spawningMercenary");
         yield return new WaitForSeconds(120f);
         StopCoroutine("spawningZolrik");
         StartCoroutine("roundEnded");
@@ -152,7 +178,7 @@ public class EnemySpawnController : MonoBehaviour
         roundText.GetComponent<UnityEngine.UI.Text>().text = "";
     }
 
-    public GameObject GetPooledObject()
+    public GameObject GetPooledObject(List<GameObject> pooledObjects )
     {
         //1
         for (int i = 0; i < pooledObjects.Count; i++)

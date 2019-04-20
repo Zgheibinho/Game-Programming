@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4112327054421909283, guid: 353613a1cebecbe4d967bdaae3866594, type: 3}
+  pooledZolriks: []
+  amountToPoolZolrik: 8

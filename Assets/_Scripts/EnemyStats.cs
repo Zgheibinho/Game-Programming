@@ -7,10 +7,12 @@ public class EnemyStats : MonoBehaviour
 {
     // Start is called before the first frame update
     public int health;
-    public const int maxHealth = 2;
+    public int maxHealth ;
+    public int moneyWorth;
     Animator enemy_anim;
     bool dead = false;
     GameObject player;
+
     void Start()
     {
         enemy_anim = GetComponent<Animator>();
@@ -62,7 +64,7 @@ public class EnemyStats : MonoBehaviour
        // Debug.Log("enemystats; " + this.GetComponent<EnemyMovement>().enabled);
         // Debug.Log("Enemy Stats script ; enemy died");
         dead = true;
-        player.GetComponent<PlayerStats>().IncreaseCoins(5);
+        player.GetComponent<PlayerStats>().IncreaseCoins(moneyWorth);
         enemy_anim.SetBool("attack", false);
         enemy_anim.SetBool("dead", true);
         StartCoroutine("disable");
