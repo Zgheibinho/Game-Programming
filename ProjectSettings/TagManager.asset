@@ -13,6 +13,8 @@ TagManager:
   - healthText
   - HUD
   - roundtext
+  - shopCam
+  - projectile2
   layers:
   - Default
   - TransparentFX

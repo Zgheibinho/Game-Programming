@@ -41,7 +41,10 @@ public class EnemyStats : MonoBehaviour
             health -= damage;
             //Debug.Log("health ==" + health);
             if (health <= 0)
+            {
+                dead = true;
                 Die();
+            }
         }
     }
 
@@ -52,6 +55,12 @@ public class EnemyStats : MonoBehaviour
         {
            // Debug.Log("hello enemystats; projectile collide");
             TakeDamage(1);
+            other.gameObject.SetActive(false);
+        }
+        if (other.tag == "projectile2")
+        {
+            // Debug.Log("hello enemystats; projectile collide");
+            TakeDamage(2);
             other.gameObject.SetActive(false);
         }
     }

@@ -7,13 +7,16 @@ public class PlayerShooting : MonoBehaviour {
     Animator player_anim;
     bool firing_start;
     public GameObject projectile;
+    public GameObject projectile2;
     public GameObject Player;
    //private GameObject tempProjectile;
     public List<GameObject> pooledObjects;
+    public List<GameObject> pooledObjects2;
     public int amountToPool = 20;
     //private Vector3 mousePos;
     private AudioSource audiosrc;
     public AudioClip  spellAudio;
+    public bool fireupgraded;
 
     void Start()
     {
@@ -21,15 +24,24 @@ public class PlayerShooting : MonoBehaviour {
         player_anim = GetComponent<Animator>();
         firing_start = false;
         audiosrc = GetComponent<AudioSource>();
+        fireupgraded = false;
 
         pooledObjects = new List<GameObject>();
-        amountToPool = 20;
+        pooledObjects2 = new List<GameObject>();
+        amountToPool = 15;
         for (int i = 0; i < amountToPool; i++)
         {
             //Debug.Log("hello ; player shooting script");
             GameObject obj = (GameObject)Instantiate(projectile);
             obj.SetActive(false);
             pooledObjects.Add(obj);
+        }
+        for (int i = 0; i < amountToPool; i++)
+        {
+            //Debug.Log("hello ; player shooting script");
+            GameObject obj = (GameObject)Instantiate(projectile2);
+            obj.SetActive(false);
+            pooledObjects2.Add(obj);
         }
     }
 
@@ -44,7 +56,18 @@ public class PlayerShooting : MonoBehaviour {
                 /*tempProjectile = GameObject.Instantiate(projectile, transform);
                 tempProjectile.transform.SetParent(null);
                 tempProjectile.GetComponent<Rigidbody>().AddForce(Player.transform.forward * 15, ForceMode.Impulse);*/
-                GameObject tempProjectile =GetPooledObject();
+                GameObject tempProjectile;
+                Debug.Log("upgraded fire? : " + fireupgraded);
+                if (!fireupgraded)
+                {
+                    Debug.Log("purple");
+                    tempProjectile = GetPooledObject();
+                }
+                else
+                {
+                    Debug.Log("blue");
+                    tempProjectile = GetPooledObject2();
+                }
               //  Debug.Log("Player shooting script; pooledObjects length"+ pooledObjects.Count);
                 if (tempProjectile != null)
                 {
@@ -88,6 +111,24 @@ public class PlayerShooting : MonoBehaviour {
         }
         //3
         GameObject obj = (GameObject)Instantiate(projectile);
+        obj.SetActive(false);
+        pooledObjects.Add(obj);
+        return obj;
+    }
+
+    public GameObject GetPooledObject2()
+    {
+        //1
+        for (int i = 0; i < pooledObjects2.Count; i++)
+        {
+            //2
+            if (!pooledObjects2[i].activeInHierarchy)
+            {
+                return pooledObjects2[i];
+            }
+        }
+        //3
+        GameObject obj = (GameObject)Instantiate(projectile2);
         obj.SetActive(false);
         pooledObjects.Add(obj);
         return obj;

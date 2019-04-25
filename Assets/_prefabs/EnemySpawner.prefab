@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4112327054421909283, guid: 353613a1cebecbe4d967bdaae3866594, type: 3}
-  pooledZolriks: []
+  mercenary: {fileID: 6786510124126082645, guid: ba97470f6fbe8644586d9b811f21d8b1,
+    type: 3}
   amountToPoolZolrik: 8
+  amountToPoolMercenary: 8

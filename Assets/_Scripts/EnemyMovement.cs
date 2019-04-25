@@ -28,7 +28,6 @@ public class EnemyMovement : MonoBehaviour
     }
     void OnEnable()
     {
-        Debug.Log("Enabled");
         player = GameObject.FindWithTag("player");
         dead = false;
         agent = GetComponent<NavMeshAgent>();
@@ -79,11 +78,11 @@ public class EnemyMovement : MonoBehaviour
 
     private IEnumerator Move()
     {
-        // Play the animation for firing
-        Debug.Log("yooo1");
+       
+       
         while (!dead)
         {
-            Debug.Log("yooo");
+            
                 agent.SetDestination(player.transform.position);
                 transform.LookAt(player.transform);
                 yield return new WaitForSeconds(1.5f);
@@ -93,7 +92,7 @@ public class EnemyMovement : MonoBehaviour
 
     private IEnumerator Damage()
     {
-        // Play the animation for firing
+        
 
         while (!dead)
         {

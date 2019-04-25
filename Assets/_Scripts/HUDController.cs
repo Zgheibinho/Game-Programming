@@ -5,13 +5,13 @@ using UnityEngine;
 public class HUDController : MonoBehaviour
 {
     // Start is called before the first frame update
-    GameObject cointext;
+    GameObject[] cointexts;
     GameObject healthtext;
     GameObject player;
     public GameObject gameOverText;
     void Start()
     {
-        cointext = GameObject.FindGameObjectWithTag("coinText");
+        cointexts = GameObject.FindGameObjectsWithTag("coinText");
         healthtext = GameObject.FindGameObjectWithTag("healthText");
         player = GameObject.FindGameObjectWithTag("player");
     }
@@ -19,13 +19,14 @@ public class HUDController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        foreach(GameObject cointext in cointexts)
         cointext.GetComponent<UnityEngine.UI.Text>().text = ""+ player.GetComponent<PlayerStats>().coins;
+
         healthtext.GetComponent<UnityEngine.UI.Text>().text = "" + player.GetComponent<PlayerStats>().health;
     }
 
     public void GameOver()
     {
-        Debug.Log("aaaaaaaaaaaaaaa");
         gameOverText.SetActive(true);
     }
 }

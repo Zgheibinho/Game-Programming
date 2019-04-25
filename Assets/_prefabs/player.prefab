@@ -853,6 +853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3.5
+  walkingAudio: {fileID: 0}
 --- !u!114 &588456164894738909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,6 +881,9 @@ MonoBehaviour:
   projectile: {fileID: 6650039154510671301, guid: 6b8e36d8f935e274490503c332d5853a,
     type: 3}
   Player: {fileID: 700918624891090807}
+  pooledObjects: []
+  amountToPool: 20
+  spellAudio: {fileID: 0}
 --- !u!114 &3603335698086594725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,6 +896,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ba68b23bdec334e9afd73e09aa2579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 30
+  maxHealth: 30
+  coins: 0
 --- !u!1 &700936669931003167
 GameObject:
   m_ObjectHideFlags: 0

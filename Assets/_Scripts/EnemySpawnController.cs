@@ -16,16 +16,22 @@ public class EnemySpawnController : MonoBehaviour
     private bool roundStarted;
     private GameObject roundText;
     private GameObject player;
+    public GameObject shopcam;
+    public int totalenemycount;
     void Start()
     {
-        spawnPoints= GameObject.FindGameObjectsWithTag("spawn");
+        shopcam= GameObject.FindGameObjectWithTag("shopCam");
+        shopcam.SetActive(false);
+        spawnPoints = GameObject.FindGameObjectsWithTag("spawn");
         currentround = 1;
         roundStarted = false;
         roundText = GameObject.FindGameObjectWithTag("roundtext");
         player = GameObject.FindGameObjectWithTag("player");
         pooledZolriks = new List<GameObject>();
+        pooledMercs = new List<GameObject>();
         for (int i = 0; i < amountToPoolZolrik; i++)
         {
+           // Debug.Log("bbbbbbb");
             GameObject obj = (GameObject)Instantiate(enemy);
             obj.SetActive(false);
             pooledZolriks.Add(obj);
@@ -33,11 +39,14 @@ public class EnemySpawnController : MonoBehaviour
 
         for (int i = 0; i < amountToPoolMercenary; i++)
         {
-            GameObject obj = (GameObject)Instantiate(mercenary);
-            obj.SetActive(false);
-            pooledMercs.Add(obj);
+            //Debug.Log("aaaaaaaa");
+            GameObject obj2 = (GameObject)Instantiate(mercenary);
+            obj2.SetActive(false);
+           // Debug.Log("object is :" + obj2);
+            pooledMercs.Add(obj2);
         }
-
+       // Debug.Log("shouuu :" + pooledZolriks.Count);
+        //Debug.Log("shouuu :" + pooledMercs.Count);
 
     }
 
@@ -83,26 +92,24 @@ public class EnemySpawnController : MonoBehaviour
             //Debug.Log("spawning enemies spawnPoints Length:" + spawnPoints.Length);
             int currentSpawn = Random.Range(1, spawnPoints.Length);
             //Debug.Log("current spawn" + currentSpawn + "current sspawn transform" + spawnPoints[currentSpawn].transform.position );
-            GameObject tempenemy = GetPooledObject(pooledZolriks);
+            GameObject tempenemy = GetPooledObject(pooledZolriks,enemy);
             tempenemy.transform.SetParent(null);
             tempenemy.transform.position = spawnPoints[currentSpawn].transform.position;
             tempenemy.SetActive(true);
-            yield return new WaitForSeconds(7f);
+            yield return new WaitForSeconds(8f);
         }
     }
 
     private IEnumerator spawningMercenary()
     {
-
         while (true)
         {
-
             int currentSpawn = Random.Range(1, spawnPoints.Length);
-            GameObject tempmerc = GetPooledObject(pooledMercs);
+            GameObject tempmerc = GetPooledObject(pooledMercs,mercenary);
             tempmerc.transform.SetParent(null);
             tempmerc.transform.position = spawnPoints[currentSpawn].transform.position;
             tempmerc.SetActive(true);
-            yield return new WaitForSeconds(11f);
+            yield return new WaitForSeconds(13f);
         }
     }
 
@@ -111,6 +118,7 @@ public class EnemySpawnController : MonoBehaviour
         StartCoroutine("displayRound");
         yield return new WaitForSeconds(30f);
         StartCoroutine("spawningZolrik");
+        StartCoroutine("spawningMercenary");
         yield return new WaitForSeconds(90f);
         StopCoroutine("spawningZolrik");
         StartCoroutine("roundEnded");
@@ -129,6 +137,7 @@ public class EnemySpawnController : MonoBehaviour
         StopCoroutine("spawningZolrik");
         StartCoroutine("roundEnded");
         currentround++;
+        player.GetComponent<PlayerStats>().heal();
         roundStarted = false;
     }
 
@@ -141,6 +150,7 @@ public class EnemySpawnController : MonoBehaviour
         StopCoroutine("spawningZolrik");
         StartCoroutine("roundEnded");
         currentround++;
+        player.GetComponent<PlayerStats>().heal();
         roundStarted = false;
     }
 
@@ -153,6 +163,7 @@ public class EnemySpawnController : MonoBehaviour
         StopCoroutine("spawningZolrik");
         StartCoroutine("roundEnded");
         currentround++;
+        player.GetComponent<PlayerStats>().heal();
         roundStarted = false;
     }
 
@@ -165,6 +176,7 @@ public class EnemySpawnController : MonoBehaviour
         StopCoroutine("spawningZolrik");
         StartCoroutine("roundEnded");
         currentround++;
+        player.GetComponent<PlayerStats>().heal();
         roundStarted = false;
     }
     private IEnumerator displayRound()
@@ -172,25 +184,36 @@ public class EnemySpawnController : MonoBehaviour
         roundText.GetComponent<UnityEngine.UI.Text>().text = "Round will start in 30 seconds";
         yield return new WaitForSeconds(5f);
         roundText.GetComponent<UnityEngine.UI.Text>().text = "";
+        StartCoroutine("displayShop");
         yield return new WaitForSeconds(20f);
         roundText.GetComponent<UnityEngine.UI.Text>().text = "Round" + currentround;
         yield return new WaitForSeconds(5f);
         roundText.GetComponent<UnityEngine.UI.Text>().text = "";
     }
+    private IEnumerator displayShop()
+    {
+        shopcam.SetActive(true);
+        yield return new WaitForSeconds(20f);
+        shopcam.SetActive(false);
+    }
 
-    public GameObject GetPooledObject(List<GameObject> pooledObjects )
+    public GameObject GetPooledObject(List<GameObject> pooledObjects , GameObject enemytype)
     {
         //1
+        Debug.Log("shouuu :"+pooledObjects); 
         for (int i = 0; i < pooledObjects.Count; i++)
         {
+            Debug.Log("pooling :"+ i);
             //2
             if (!pooledObjects[i].activeInHierarchy)
             {
+                Debug.Log("wloooo");
                 return pooledObjects[i];
             }
         }
         //3
-        GameObject obj = (GameObject)Instantiate(enemy);
+        Debug.Log("wleee");
+        GameObject obj = (GameObject)Instantiate(enemytype);
         obj.SetActive(false);
         pooledObjects.Add(obj);
         return obj;
