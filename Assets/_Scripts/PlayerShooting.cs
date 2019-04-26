@@ -85,7 +85,25 @@ public class PlayerShooting : MonoBehaviour {
                 StartCoroutine("Fire");
             }
         }
-        
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            StartCoroutine("dance");
+        }
+
+
+    }
+
+
+    private IEnumerator dance()
+    {
+        // Play the animation for dancing
+
+
+        player_anim.SetBool("dance", true);
+
+        yield return new WaitForSeconds(2f);
+
+        player_anim.SetBool("dance", false);
     }
 
     private IEnumerator Fire()
