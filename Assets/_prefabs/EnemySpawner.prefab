@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9207213695266229965}
   m_Layer: 0
   m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_TagString: spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,5 +46,9 @@ MonoBehaviour:
   enemy: {fileID: 4112327054421909283, guid: 353613a1cebecbe4d967bdaae3866594, type: 3}
   mercenary: {fileID: 6786510124126082645, guid: ba97470f6fbe8644586d9b811f21d8b1,
     type: 3}
+  troll: {fileID: 2475094410680479091, guid: dddcac55ce050fa48b89e9d34ec327cb, type: 3}
   amountToPoolZolrik: 8
   amountToPoolMercenary: 8
+  amountToPoolTroll: 5
+  shopcam: {fileID: 0}
+  totalenemycount: 0

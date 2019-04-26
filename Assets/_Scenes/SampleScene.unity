@@ -1443,7 +1443,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -305, y: -445}
+  m_AnchoredPosition: {x: -305, y: -255}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &85253056
@@ -14317,7 +14317,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 400000, guid: 627a8257aa6f8c64e94a9fa774aa3d82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.1
+      value: 35.14
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 627a8257aa6f8c64e94a9fa774aa3d82, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15610,7 +15610,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948631678}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 375.9, y: 238.57, z: 0}
+  m_LocalPosition: {x: -584, y: 11, z: 0}
   m_LocalScale: {x: 34.920486, y: 34.920486, z: 34.920486}
   m_Children:
   - {fileID: 1214906081}
@@ -29818,7 +29818,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2117808842
 Transform:
   m_ObjectHideFlags: 0
@@ -30520,6 +30520,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6650039154510671301, guid: 50014a88c404ed54c8f3bb46ef542e2e,
         type: 3}
+    - target: {fileID: 702326388285758337, guid: 6c6f275e46075c84092fdc2036179aa2,
+        type: 3}
+      propertyPath: airstrike
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3603335698086594725, guid: 6c6f275e46075c84092fdc2036179aa2,
         type: 3}
       propertyPath: maxHealth
@@ -30533,7 +30538,12 @@ PrefabInstance:
     - target: {fileID: 3603335698086594725, guid: 6c6f275e46075c84092fdc2036179aa2,
         type: 3}
       propertyPath: coins
-      value: 100
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 588456164894738909, guid: 6c6f275e46075c84092fdc2036179aa2,
+        type: 3}
+      propertyPath: airstrike
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c6f275e46075c84092fdc2036179aa2, type: 3}

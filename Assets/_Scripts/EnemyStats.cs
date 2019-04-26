@@ -12,18 +12,20 @@ public class EnemyStats : MonoBehaviour
     Animator enemy_anim;
     bool dead = false;
     GameObject player;
-
+    GameObject spawner;
     void Start()
     {
         enemy_anim = GetComponent<Animator>();
         health = maxHealth;
         player = GameObject.FindGameObjectWithTag("player");
+        spawner = GameObject.FindGameObjectWithTag("spawner");
     }
 
     private void OnEnable()
     {
         enemy_anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("player");
+        spawner = GameObject.FindGameObjectWithTag("spawner");
         health = maxHealth;
         enemy_anim.SetBool("dead", false);
     }
@@ -39,6 +41,7 @@ public class EnemyStats : MonoBehaviour
         if (!dead)
         {
             health -= damage;
+            Debug.Log("health ==" + health);
             //Debug.Log("health ==" + health);
             if (health <= 0)
             {
@@ -53,7 +56,7 @@ public class EnemyStats : MonoBehaviour
     {
         if (other.tag == "projectile1")
         {
-           // Debug.Log("hello enemystats; projectile collide");
+            //Debug.Log("hello enemystats; projectile collide");
             TakeDamage(1);
             other.gameObject.SetActive(false);
         }
@@ -70,8 +73,9 @@ public class EnemyStats : MonoBehaviour
         //Debug.Log("enemystats; "+this.GetComponent<EnemyMovement>());
         this.GetComponent<EnemyMovement>().dead = true;
         //this.GetComponent<NavMeshAgent>().enabled = false;
-       // Debug.Log("enemystats; " + this.GetComponent<EnemyMovement>().enabled);
-        // Debug.Log("Enemy Stats script ; enemy died");
+        // Debug.Log("enemystats; " + this.GetComponent<EnemyMovement>().enabled);
+         Debug.Log("Enemy Stats script ; enemy died");
+        spawner.GetComponent<EnemySpawnController>().totalenemycount--;
         dead = true;
         player.GetComponent<PlayerStats>().IncreaseCoins(moneyWorth);
         enemy_anim.SetBool("attack", false);

@@ -15,6 +15,7 @@ TagManager:
   - roundtext
   - shopCam
   - projectile2
+  - spawner
   layers:
   - Default
   - TransparentFX

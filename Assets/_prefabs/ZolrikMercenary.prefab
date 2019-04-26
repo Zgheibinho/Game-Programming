@@ -1433,7 +1433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   maxHealth: 3
-  moneyWorth: 8
+  moneyWorth: 6
 --- !u!1 &6786510124126082647
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,10 +57,10 @@ public class PlayerShooting : MonoBehaviour {
                 tempProjectile.transform.SetParent(null);
                 tempProjectile.GetComponent<Rigidbody>().AddForce(Player.transform.forward * 15, ForceMode.Impulse);*/
                 GameObject tempProjectile;
-                Debug.Log("upgraded fire? : " + fireupgraded);
+                //Debug.Log("upgraded fire? : " + fireupgraded);
                 if (!fireupgraded)
                 {
-                    Debug.Log("purple");
+                    //Debug.Log("purple");
                     tempProjectile = GetPooledObject();
                 }
                 else
@@ -82,6 +82,7 @@ public class PlayerShooting : MonoBehaviour {
                 StartCoroutine("Fire");
             }
         }
+        
     }
 
     private IEnumerator Fire()

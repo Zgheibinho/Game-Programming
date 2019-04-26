@@ -73,6 +73,7 @@
     <Compile Include="Assets\_Scripts\PlayerStats.cs" />
     <Compile Include="Assets\_Scripts\ProjectileController.cs" />
     <Compile Include="Assets\_Scripts\ShopController.cs" />
+    <Compile Include="Assets\AirStrikeController.cs" />
     <Compile Include="Assets\Imported Assets\FantasyMonstersZolrik\Scene\Script\buttondemo2.cs" />
     <Compile Include="Assets\Imported Assets\LowPoly Fantasy Monsters Pack Ver1.0_Demo\Environment\Scripts\Move.cs" />
     <Compile Include="Assets\Imported Assets\LowPoly Fantasy Monsters Pack Ver1.0_Demo\Environment\Scripts\PointLight.cs" />
