@@ -93,6 +93,10 @@ public class EnemySpawnController : MonoBehaviour
                 StartCoroutine("round5");
                 roundStarted = true;
             }
+            if (currentround == 6)
+            {
+                roundText.GetComponent<UnityEngine.UI.Text>().text = "Thank you for playing :)";
+            }
         }
     }
 
@@ -146,6 +150,20 @@ public class EnemySpawnController : MonoBehaviour
         }
     }
 
+    private IEnumerator spawningMercenary2()
+    {
+        while (true)
+        {
+            int currentSpawn = Random.Range(1, spawnPoints.Length);
+            GameObject tempmerc = GetPooledObject(pooledMercs, mercenary);
+            tempmerc.transform.SetParent(null);
+            tempmerc.transform.position = spawnPoints[currentSpawn].transform.position;
+            tempmerc.SetActive(true);
+            totalenemycount++;
+            yield return new WaitForSeconds(8f);
+        }
+    }
+
     private IEnumerator spawningTrolls()
     {
         while (true)
@@ -167,7 +185,7 @@ public class EnemySpawnController : MonoBehaviour
         StartCoroutine("spawningZolrikRound1");
         yield return new WaitForSeconds(75f);
         StopCoroutine("spawningZolrikRound1");
-        StartCoroutine("roundEnded");
+
         currentround++;
         player.GetComponent<PlayerStats>().heal();
         roundStarted = false;
@@ -182,7 +200,6 @@ public class EnemySpawnController : MonoBehaviour
         yield return new WaitForSeconds(90f);
         StopCoroutine("spawningZolrik");
         StopCoroutine("spawningMercenary");
-        StartCoroutine("roundEnded");
         currentround++;
         player.GetComponent<PlayerStats>().heal();
         roundStarted = false;
@@ -192,12 +209,11 @@ public class EnemySpawnController : MonoBehaviour
     {
         StartCoroutine("displayRound");
         yield return new WaitForSeconds(30f);
-        StartCoroutine("spawningZolrik");
+        StartCoroutine("spawningZolrikRound1");
         StartCoroutine("spawningTrolls");
         yield return new WaitForSeconds(90f);
-        StopCoroutine("spawningZolrik");
+        StopCoroutine("spawningZolrikRound1");
         StopCoroutine("spawningTrolls");
-        StartCoroutine("roundEnded");
         currentround++;
         player.GetComponent<PlayerStats>().heal();
         roundStarted = false;
@@ -207,12 +223,13 @@ public class EnemySpawnController : MonoBehaviour
     {
         StartCoroutine("displayRound");
         yield return new WaitForSeconds(30f);
-        StartCoroutine("spawningMercenary");
+        StartCoroutine("spawningZolrik");
+        StartCoroutine("spawningMercenary2");
         StartCoroutine("spawningTrolls");
         yield return new WaitForSeconds(90f);
-        StartCoroutine("spawningMercenary");
+        StopCoroutine("spawningZolrik");
+        StopCoroutine("spawningMercenary2");
         StopCoroutine("spawningTrolls");
-        StartCoroutine("roundEnded");
         currentround++;
         player.GetComponent<PlayerStats>().heal();
         roundStarted = false;
@@ -222,14 +239,14 @@ public class EnemySpawnController : MonoBehaviour
     {
         StartCoroutine("displayRound");
         yield return new WaitForSeconds(30f);
-        StartCoroutine("spawningZolrik");
-        StartCoroutine("spawningMercenary");
+        StartCoroutine("spawningZolrikRound1");
+        StartCoroutine("spawningMercenary2");
         StartCoroutine("spawningTrolls");
         yield return new WaitForSeconds(120f);
-        StopCoroutine("spawningZolrik");
-        StartCoroutine("spawningMercenary");
+        StopCoroutine("spawningZolrikRound1");
+        StopCoroutine("spawningMercenary2");
         StopCoroutine("spawningTrolls");
-        StartCoroutine("roundEnded");
+
         currentround++;
         player.GetComponent<PlayerStats>().heal();
         roundStarted = false;
@@ -241,14 +258,16 @@ public class EnemySpawnController : MonoBehaviour
         roundText.GetComponent<UnityEngine.UI.Text>().text = "";
         StartCoroutine("displayShop");
         yield return new WaitForSeconds(20f);
-        roundText.GetComponent<UnityEngine.UI.Text>().text = "Round" + currentround;
+        roundText.GetComponent<UnityEngine.UI.Text>().text = "Round " + currentround;
         yield return new WaitForSeconds(5f);
         roundText.GetComponent<UnityEngine.UI.Text>().text = "";
     }
     private IEnumerator displayShop()
     {
         shopcam.SetActive(true);
+        player.GetComponent<PlayerShooting>().roundbreak = true;
         yield return new WaitForSeconds(20f);
+        player.GetComponent<PlayerShooting>().roundbreak = false;
         shopcam.SetActive(false);
     }
 

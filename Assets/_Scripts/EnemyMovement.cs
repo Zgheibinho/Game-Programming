@@ -99,7 +99,7 @@ public class EnemyMovement : MonoBehaviour
             
                 if (isAttacking)
                     player.GetComponent<PlayerStats>().TakeDamage(dmgAmount);
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(1f);
             
         }
     }

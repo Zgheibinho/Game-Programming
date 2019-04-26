@@ -13,16 +13,19 @@ public class EnemyStats : MonoBehaviour
     bool dead = false;
     GameObject player;
     GameObject spawner;
+    private AudioSource audiosrc;
     void Start()
     {
         enemy_anim = GetComponent<Animator>();
         health = maxHealth;
         player = GameObject.FindGameObjectWithTag("player");
         spawner = GameObject.FindGameObjectWithTag("spawner");
+        audiosrc = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
     {
+        audiosrc = GetComponent<AudioSource>();
         enemy_anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("player");
         spawner = GameObject.FindGameObjectWithTag("spawner");
@@ -38,6 +41,7 @@ public class EnemyStats : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        Debug.Log("health :"+ health);
         if (!dead)
         {
             health -= damage;
@@ -48,6 +52,10 @@ public class EnemyStats : MonoBehaviour
                 dead = true;
                 Die();
             }
+        }
+        else
+        {
+            Debug.Log("what");
         }
     }
 
@@ -81,12 +89,12 @@ public class EnemyStats : MonoBehaviour
         enemy_anim.SetBool("attack", false);
         enemy_anim.SetBool("dead", true);
         StartCoroutine("disable");
-
+        audiosrc.Play();
     }
 
     private IEnumerator disable()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3f);
         dead = false;
         gameObject.SetActive(false);
     }

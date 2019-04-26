@@ -17,10 +17,13 @@ public class PlayerShooting : MonoBehaviour {
     private AudioSource audiosrc;
     public AudioClip  spellAudio;
     public bool fireupgraded;
+    public bool roundbreak;
 
     void Start()
     {
-       // Debug.Log("hello 1");
+        // Debug.Log("hello 1");
+
+        roundbreak = false;
         player_anim = GetComponent<Animator>();
         firing_start = false;
         audiosrc = GetComponent<AudioSource>();
@@ -48,7 +51,7 @@ public class PlayerShooting : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !roundbreak)
         {
             if (!firing_start)
             {
